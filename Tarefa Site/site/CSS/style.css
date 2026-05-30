@@ -1,0 +1,232 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+:root {
+  --cor-de-fundo: #0F172A;
+  --cor-da-fonte: #F8FAFC;
+  --cor-container: #1E293B;
+  --cor-botoes: #7C3AED;
+}
+
+:root {
+    --fonte1:"Orbitron", sans-serif;
+    --fonte2:"Montserrat", sans-serif;
+}
+
+nav{
+    max-width: 100%;
+    margin: auto;
+    padding: 1.5rem 10rem;
+
+        a{
+            text-decoration: none;
+            color: var(--cor-da-fonte);
+        }
+
+        ul{
+            list-style: none;
+        }
+}
+
+.logo{
+    font-family: var(--fonte1);
+    font-weight: 900;
+    font-size: 1.5rem ;
+}
+
+body{
+    background-color: var(--cor-de-fundo);
+    font-family: var(--fonte2);
+    color: var(--cor-da-fonte);
+    font-weight: 400;
+}
+
+.baner{
+    background-color: var(--cor-container);
+    max-width: 100%;
+    margin: 1.5rem 1.5rem 0;
+    height: 75vh;
+    padding: 1.5rem;
+    text-align: justify;
+    border-radius: 0.5rem;
+
+        h1{
+            
+            font-size: 2.5rem;
+            line-height: 4rem;
+        }
+
+        p{
+            font-size: 1.5rem;
+        }
+
+        img{
+            padding: 3rem 0;
+        }
+}
+
+.container{
+    margin: 1rem 1.5rem;
+
+    div{
+        padding: 1rem 0;
+        line-height: 2rem;
+        background-color: var(--cor-container);
+        width: 12%;
+
+        img{
+            max-width: 14rem;
+            height: auto;
+        }
+        
+        button{
+            border-radius: 0.3rem;
+            border-style: none;
+            padding: 0.5rem;
+            background-color: var(--cor-botoes);
+            color: var(--cor-da-fonte);
+            cursor: pointer;
+        }
+
+    }
+
+}
+
+.baner2{
+    max-width: 100%;
+    height: 60vh;
+    padding: 1.5rem;
+    text-align: justify;
+
+    h2{
+        line-height: 4rem;
+        font-size: 1.8rem;
+    }
+
+    p{
+        font-size: 1rem;
+    }
+
+    img{
+        padding: 2rem 0;
+    }
+}
+
+.baner3{
+    max-width: 100%;
+    height: 70vh;
+    margin: 1rem 1.5rem;
+    padding: 1.5rem;
+    background-color: var(--cor-container);
+    border-radius: 0.3rem;
+    text-align: justify;
+
+        .detalhes{
+            line-height: 2.5rem;
+            p{
+                font-weight: 600;
+            }
+        }
+
+                .descricao{
+                    padding: 0.5rem 0;
+                }
+
+                    button{
+                        padding: 0.5rem;
+                        margin-top: 0.5rem; 
+                        background-color: var(--cor-botoes);
+                        color: var(--cor-da-fonte);
+                        border-style: none;
+                        border-radius: 0.5rem;
+                        cursor: pointer;
+                    }
+}
+
+.baner_autor{
+    padding: 1.5rem;
+    max-width: 50%;
+    background-color: var(--cor-container);
+    margin: 1.5rem;
+    border-radius: 0.3rem;
+
+    h1{
+        line-height: 5rem;
+    }
+
+        fieldset{
+            padding: 0.5rem 1.5rem 1.5rem;
+        }
+
+            h3{
+                line-height: 3rem;
+            }
+
+                p{
+                    text-align: justify;
+                }
+}
+
+.form-esquerdo{
+    padding: 1.5rem;
+    line-height: 4rem;
+
+    .local{
+        line-height: 1rem;
+        padding: 3rem 0;
+    }
+   
+    .contato{
+        line-height: 1rem;
+    }
+}
+
+.form-direito{
+    padding: 1.5rem;
+    line-height: 3rem;
+
+    input{
+    background-color: transparent;
+    -webkit-text-fill-color: var(--cor-da-fonte);
+    padding: 0.5rem;
+    border-radius: 0.3rem;
+    border: 0.1rem;
+    border-style: solid;
+    color: var(--cor-da-fonte);
+    }
+
+        textarea{
+            background-color: transparent;
+            -webkit-text-fill-color: var(--cor-da-fonte);
+            padding: 0.5rem;
+            border-radius: 0.3rem;
+            border: 0.1rem;
+            border-style: solid;
+            color: var(--cor-da-fonte);
+        }
+
+            button{
+                padding: 0.5rem;
+                background-color: var(--cor-botoes);
+                color: var(--cor-da-fonte);
+                border-radius: 0.3rem;
+                border-style: none;
+                cursor: pointer;
+            }
+}
+
+footer{
+    padding: 1.5rem;
+    font-size: 0.8rem;
+    max-height: 10vh;
+
+        a{
+            color: var(--cor-da-fonte);
+        }
+}
