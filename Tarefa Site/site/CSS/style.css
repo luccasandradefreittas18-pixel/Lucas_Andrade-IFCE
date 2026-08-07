@@ -19,214 +19,896 @@
     --fonte2:"Montserrat", sans-serif;
 }
 
-nav{
-    max-width: 100%;
-    margin: auto;
-    padding: 1.5rem 10rem;
-
-        a{
-            text-decoration: none;
-            color: var(--cor-da-fonte);
-        }
-
-        ul{
-            list-style: none;
-        }
+body{
+    font-family: var(--fonte2);
+    background-color: var(--cor-de-fundo);
+    color: var(--cor-da-fonte);
 }
 
-.logo{
+hr{
+    width: 97%;
+    display: flex;
+    justify-self: center;
+}
+
+/* MENU DE NAVEGAÇÃO */
+
+header{
+    width: 97%;
+    height: 10%;
+    display: flex;
+    flex-direction: row;
+    justify-self: center;
+    align-self: center;
+    align-items: center;
+    justify-content: space-between;
+}
+
+header a:hover{
+    color: var(--cor-da-fonte);
+    transform:scale(1.05);
+}
+
+header li{
+    list-style: none;
+}
+
+span{
+    padding: 2rem;
     font-family: var(--fonte1);
     font-weight: 900;
-    font-size: 1.5rem ;
+    font-size: x-large;
 }
 
-body{
-    background-color: var(--cor-de-fundo);
-    font-family: var(--fonte2);
+span a{
     color: var(--cor-da-fonte);
-    font-weight: 400;
+    text-decoration: none;
 }
 
-.baner{
+nav{
+    width: 30%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-self: center;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2rem;
+}
+
+.menu_de_navegação{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.menu_de_navegação a{
+    text-decoration: none;
+    color: #5c5c5c;
+    display: inline-block;
+    transition: .2s;
+}
+/* MENU DE NAVEGAÇÃO */
+
+/* BANER DE APRESENTAÇÃO 01 */
+.baner1{
+    width: 97%;
+    height: 30%;
     background-color: var(--cor-container);
-    max-width: 100%;
-    margin: 1.5rem 1.5rem 0;
-    height: 75vh;
-    padding: 1.5rem;
-    text-align: justify;
+    padding: 2rem;
+    gap: 3rem;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
     border-radius: 0.5rem;
-
-        h1{
-            
-            font-size: 2.5rem;
-            line-height: 4rem;
-        }
-
-        p{
-            font-size: 1.5rem;
-        }
-
-        img{
-            padding: 3rem 0;
-        }
+    display: flex;
+    flex-direction: row;
+    justify-self: center;
+    justify-content: space-between;
+    align-items: center;
 }
 
-.container{
-    margin: 1rem 1.5rem;
+.texto_baner1{
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 
-    div{
-        padding: 1rem 0;
-        line-height: 2rem;
-        background-color: var(--cor-container);
-        width: 12%;
+.texto_baner1 h1{
+    padding: 3rem;
+    font-size: xx-large;
+    text-align: center;
+}
 
-        img{
-            max-width: 14rem;
-            height: auto;
-        }
-        
-        button{
-            border-radius: 0.3rem;
-            border-style: none;
-            padding: 0.5rem;
-            background-color: var(--cor-botoes);
-            color: var(--cor-da-fonte);
-            cursor: pointer;
-        }
+.texto_baner1 p{
+    padding-bottom: 3rem;
+    padding-left: 3rem;
+    padding-right: 3rem;
+    font-size: x-large;
+    text-align: justify;
+}
 
-    }
+.img_baner1{
+    min-width: 40%;
+    min-height: 100%;
+}
+
+.img_baner1 img{
+    width: 100%;
+    height: 100%;
+    border-radius: 0.5rem;
+}
+/* BANER DE APRESENTAÇÃO 01 */
+
+/* LISTA DE PRODUTOS */
+.container_de_produtos{
+    width: 97%;
+    height: 30%;
+    padding: 2rem;
+    display: flex;
+    justify-self: center;
+    justify-content: space-between;
+    align-items: center;
+    gap: 5rem;
+    flex-wrap: wrap;
+    border-radius: 0.5rem;
+}
+
+.cards{
+    min-width: 17%;
+    min-height: 100%;
+    padding-bottom: 2rem;
+    background-color: var(--cor-container);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 1rem;
+    gap: 1rem;
+}
+
+.cards img{
+    width: 100%;
+}
+
+.cards h3 {
+    padding-left: 2rem;
+    padding-right: 2em;
+}
+
+.cards button{
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    border-style: none;
+    background-color: var(--cor-botoes);
+    color: #F8FAFC;
+    cursor: pointer;
 
 }
 
+.cards button:hover{
+    background-color: #5e06f6;
+    transform: scale(1.05);
+}
+/* LISTA DE PRODUTOS */
+
+/* BANER DE APRESENTAÇÃO 02 */
 .baner2{
-    max-width: 100%;
-    height: 60vh;
-    padding: 1.5rem;
-    text-align: justify;
-
-    h2{
-        line-height: 4rem;
-        font-size: 1.8rem;
-    }
-
-    p{
-        font-size: 1rem;
-    }
-
-    img{
-        padding: 2rem 0;
-    }
-}
-
-.baner3{
-    max-width: 100%;
-    height: 70vh;
-    margin: 1rem 1.5rem;
-    padding: 1.5rem;
+    width: 97%;
+    height: 30%;
     background-color: var(--cor-container);
-    border-radius: 0.3rem;
+    padding: 2rem;
+    gap: 3rem;
+    margin-top: 2rem;
+    border-radius: 0.5rem;
+    display: flex;
+    flex-direction: row;
+    justify-self: center;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.texto_baner2{
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.texto_baner2 h2{
+    padding: 3rem;
+    font-size: 3vh;
+    text-align: center;
+}
+
+.texto_baner2 p{
+    padding-bottom: 3rem;
+    padding-left: 3rem;
+    padding-right: 3rem;
+    font-size: 2vh;
     text-align: justify;
-
-        .detalhes{
-            line-height: 2.5rem;
-            p{
-                font-weight: 600;
-            }
-        }
-
-                .descricao{
-                    padding: 0.5rem 0;
-                }
-
-                    button{
-                        padding: 0.5rem;
-                        margin-top: 0.5rem; 
-                        background-color: var(--cor-botoes);
-                        color: var(--cor-da-fonte);
-                        border-style: none;
-                        border-radius: 0.5rem;
-                        cursor: pointer;
-                    }
 }
 
-.baner_autor{
-    padding: 1.5rem;
-    max-width: 50%;
-    background-color: var(--cor-container);
-    margin: 1.5rem;
-    border-radius: 0.3rem;
-
-    h1{
-        line-height: 5rem;
-    }
-
-        fieldset{
-            padding: 0.5rem 1.5rem 1.5rem;
-        }
-
-            h3{
-                line-height: 3rem;
-            }
-
-                p{
-                    text-align: justify;
-                }
+.img_baner2{
+    min-width: 40%;
+    min-height: 100%;
 }
 
-.form-esquerdo{
-    padding: 1.5rem;
-    line-height: 4rem;
+.img_baner2 img{
+    width: 100%;
+    height: 70%;
+    border-radius: 0.5rem;
+}
+/* BANER DE APRESENTAÇÃO 02 */
 
-    .local{
-        line-height: 1rem;
-        padding: 3rem 0;
-    }
-   
-    .contato{
-        line-height: 1rem;
-    }
+/* FORMULARIO PARA CONTATO */
+.formulario_completo{
+    width: 100%;
+    height: 50vh;
+    gap: 2rem;
+    padding: 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-evenly;
 }
 
-.form-direito{
-    padding: 1.5rem;
-    line-height: 3rem;
+.form_esquerdo{
+    width: 15%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+}
 
-    input{
+.form_esquerdo h3{
+    padding-top: 2rem;
+    text-align: center;
+}
+
+.form_direito{
+    height: 100%;
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.container_nome-email{
+    height: 40%;
+    width: 100%;
+    gap: 1rem;
+    display: flex;
+    align-items: center;
+    align-self: flex-start;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.campo_nome,.campo_email,.campo_assunto,.campo_mensagem{
+    display: flex;
+    flex-direction: column;
+}
+
+.container_assunto-mensagem{
+    height: 60%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-self: flex-start;
+    justify-content: space-evenly;
+    gap: 1rem;
+}
+
+.container_nome-email input{
+    height: 3vh;
+    width: 17vw;
+    padding: 0.5rem;
+    outline: none;
+    color: #F8FAFC;
     background-color: transparent;
-    -webkit-text-fill-color: var(--cor-da-fonte);
+    border: solid 2px white;
+    border-radius: 0.3rem;
+}
+
+.container_assunto-mensagem input{
+    height: 3vh;
+    width: 35vw;
+    padding: 0.5rem;
+    outline: none;
+    color: #F8FAFC;
+    background-color: transparent;
+    border: solid 2px white;
+    border-radius: 0.3rem;
+}
+
+.container_assunto-mensagem textarea{
+    height: 10vh;
+    width: 35vw;
+    padding: 0.5rem;
+    outline: none;
+    color: #F8FAFC;
+    background-color: transparent;
+    border: solid 2px white;
+    border-radius: 0.3rem;
+}
+
+.form_direito button{
+    min-width: 20%;
+    padding: 0.5rem;
+    background-color: var(--cor-botoes);
+    color: var(--cor-da-fonte);
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+}
+
+.form_direito button:hover{
+    background-color: #5e06f6;
+    transform: scale(1.05);
+}
+/* FORMULARIO PARA CONTATO */
+
+/* RODAPÉ TODAS AS PAGINAS */
+footer{
+    width: 97%;
+    height: 10vh;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-self: center;
+}
+
+footer a{
+    text-decoration: none;
+    color: #5c5c5c;
+}
+
+footer a:hover{
+    color: var(--cor-da-fonte);
+    transform: scale(1.05);
+    text-decoration: underline;
+}
+/* RODAPÉ TODAS AS PAGINAS */
+
+/* BANER DE DETALHES DO PRODUTO */
+.baner3{
+    width: 97%;
+    height: 100%;
+    padding: 2rem;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    border-radius: 0.5rem;
+    display: flex;
+    gap: 2rem;
+    flex-direction: column;
+    justify-self: center;
+    align-items: center;
+    background-color: #1E293B;
+}
+
+.detalhes_baner3{
+    width: 80%;
+    height: 70%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    align-self: center;
+}
+
+.descricao_produto{
+    width: 80%;
+    height: 30%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    align-self: center;
+}
+
+.detalhes_baner3 img{
+    min-width: 20%;
+    min-height: 20%;
+    border-radius: 0.5rem;
+}
+
+.detalhes_baner3 h3{
+    font-size: x-large;
+    padding: 1rem;
+}
+
+.detalhes_baner3 p{
+    font-size: x-large;
+}
+
+.descricao_produto p{
+    line-height: 3vh;
+    text-align: justify;
+}
+
+.baner3 button{
+    width: 30%;
+    height: 6vh;
+    font-size: larger;
+    padding: 0.5rem;
+    margin-top: 1rem;
+    background-color: var(--cor-botoes);
+    color: var(--cor-da-fonte);
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+}
+
+.baner3 button:hover{
+    background-color: #5e06f6;
+    transform: scale(1.05);
+}
+/* BANER DE DETALHES DO PRODUTO */
+
+/* FORMULARIO DE LOGIN */
+.formulario_de_login{
+    min-width: 30vw;
+    min-height: 60vh;
+    padding: 2.5rem;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    border-radius: 0.5rem;
+    background-color: var(--cor-container);
+    display: flex;
+    flex-direction: column;
+    justify-self: center;
+    align-items: center;
+    justify-items: center;
+    justify-content: space-evenly;
+}
+
+.formulario_de_login h2{
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.formulario_de_login .campos_email-senha{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-items: center;
+    justify-content: center;
+}
+
+.formulario_de_login .checkbox_mostrar-senha{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-items: center;
+    justify-content: space-evenly;
+}
+
+.formulario_de_login .link_cadastro{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+
+.campos_email-senha input{
+    height: 6vh;
+    width: 100%;
+    padding: 0.5rem;
+    outline: none;
+    color: #F8FAFC;
+    background-color: transparent;
+    border: solid 2px white;
+    border-radius: 0.3rem;
+    font-size: larger;
+}
+
+.formulario_de_login button{
+    height: 6vh;
+    width: 100%;
+    font-size: larger;
+    padding: 0.5rem;
+    margin-top: 1rem;
+    background-color: var(--cor-botoes);
+    color: var(--cor-da-fonte);
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+}
+
+.formulario_de_login button:hover{
+    background-color: #5e06f6;
+    transform: scale(1.05);
+}
+
+.formulario_de_login a{
+    text-decoration: none;
+    color: #5c5c5c;
+}
+
+.formulario_de_login a:hover{
+    color: var(--cor-da-fonte);
+    transform: scale(1.05);
+    text-decoration: underline;
+}
+/* FORMULARIO DE LOGIN */
+
+/* FORMULARIO DE CADASTRO DE USUÁRIOS E TABELA DE USUARIOS CADASTRADOS */
+.container_formulario-cadastro{
+    width: 97%;
+    height: 100%;
+    padding: 2rem;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    border-radius: 0.5rem;
+    background-color: var(--cor-container);
+    justify-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    justify-self: center;
+    flex-wrap: wrap;
+}
+
+.formulario_cadastro-usuarios{
+    min-width: 15%;
+    min-height: 100%;
+    padding: 2rem;
+    border: solid 2px rgb(255, 255, 255);
+    border-radius: 0.3rem;
+    display: flex;
+    align-items: center;
+    justify-items: center;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.formulario_cadastro-usuarios h2{
+    font-size: x-large;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.formulario_cadastro-usuarios .campos_dados-usuarios{
+    width: 100%;
+    height: 30%;
+    gap: 0.5rem;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    justify-items: center;
+}
+
+.formulario_cadastro-usuarios input{
+    height: 3vh;
+    width: 100%;
+    padding: 1rem;
+    outline: none;
+    color: #F8FAFC;
+    background-color: transparent;
+    border: solid 2px white;
+    border-radius: 0.3rem;
+}
+
+.formulario_cadastro-usuarios button{
+    height: 6vh;
+    width: 85%;
+    font-size: larger;
+    padding: 0.5rem;
+    margin-top: 1rem;
+    background-color: var(--cor-botoes);
+    color: var(--cor-da-fonte);
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+}
+
+.formulario_cadastro-usuarios button:hover{
+    background-color: #5e06f6;
+    transform: scale(1.05);
+}
+
+.usuarios_cadastrados{
+    min-width: 65%;
+    min-height: 100%;
+    padding: 2rem;
+    border-radius: 0.3rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-items: center;
+}
+.usuarios_cadastrados h2{
+    font-size: x-large;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.usuarios_cadastrados table{
+    width: 100%;
+    height: 100%;
+    border-spacing: 0px;
+}
+
+.usuarios_cadastrados th{
+    background-color: var(--cor-botoes);
+    font-size: medium;
+    height: 4vh;
+    border-top-left-radius: 0.5rem;
+    border-top-right-radius: 0.5rem;
+    border: solid 1px white;
+    padding: 0.3rem;
+}
+
+
+.usuarios_cadastrados td{
+    border-right: solid 1px white;
+    border-left: solid 1px white;
+    padding: 0.3rem;
+    text-align: center;
+    font-size: small;
+    height: 3vh;
+}
+
+.usuarios_cadastrados .borda_final{
+    border-bottom: solid 1px white;
+    border-bottom-left-radius: 0.5rem;
+    border-bottom-right-radius: 0.5rem;
+}
+
+.usuarios_cadastrados button{
+    margin: 0.3rem;
+    padding: 0.5rem;
+    border: none;
+    border-radius: 0.5rem;
+    color: #F8FAFC;
+    background-color: var(--cor-botoes);
+    cursor: pointer;
+}
+
+.usuarios_cadastrados button:hover{
+    background-color: #5e06f6;
+    transform: scale(1.05);
+}
+/* FORMULARIO DE CADASTRO DE USUÁRIOS E TABELA DE USUARIOS CADASTRADOS */
+
+/* FORMULARIO DE CADASTRO DE PRODUTOS E TABELA DE USUARIOS CADASTRADOS */
+.container_formulario-cadastro_de_produtos{
+    width: 97%;
+    height: 100%;
+    padding: 2rem;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    border-radius: 0.5rem;
+    background-color: var(--cor-container);
+    justify-items: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    justify-self: center;
+    flex-wrap: wrap;
+}
+
+.formulario_cadastro-produtos{
+    min-width: 25%;
+    min-height: 100%;
+    gap: 1rem;
+    padding: 2rem;
+    border: solid 2px rgb(255, 255, 255);
+    border-radius: 0.3rem;
+    display: flex;
+    align-items: center;
+    justify-items: center;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.formulario_cadastro-produtos h2{
+    font-size: x-large;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.formulario_cadastro-produtos .campos_dados-produtos{
+    width: 100%;
+    height: 30%;
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    justify-content: center; 
+}
+
+.formulario_cadastro-produtos input{
+    height: 3vh;
+    width: 100%;
+    padding: 1rem;
+    outline: none;
+    color: #F8FAFC;
+    background-color: transparent;
+    border: solid 2px white;
+    border-radius: 0.3rem;
+}
+
+.formulario_cadastro-produtos textarea{
+    height: 15vh;
+    width: 100%;
+    padding: 1rem;
+    outline: none;
+    color: #F8FAFC;
+    background-color: transparent;
+    border: solid 2px white;
+    border-radius: 0.3rem;
+}
+
+.formulario_cadastro-produtos select{
+    background-color: transparent;
+    color: #F8FAFC;
+    border: solid 2px white;;
     padding: 0.5rem;
     border-radius: 0.3rem;
-    border: 0.1rem;
-    border-style: solid;
+    outline: none;
+    cursor: pointer;
+}
+
+.formulario_cadastro-produtos select:focus {
+    border-color: var(--cor-botoes);
+    outline: none;
+}
+
+
+.formulario_cadastro-produtos option{
+    background-color: var(--cor-container);
+    color: #F8FAFC;
+}
+
+
+.formulario_cadastro-produtos .area_arquivo{
+    height: 10vh;
+}
+
+.formulario_cadastro-produtos button{
+    height: 10vh;
+    width: 100%;
+    font-size: larger;
+    padding: 0.5rem;
+    margin-top: 1rem;
+    background-color: var(--cor-botoes);
     color: var(--cor-da-fonte);
-    }
-
-        textarea{
-            background-color: transparent;
-            -webkit-text-fill-color: var(--cor-da-fonte);
-            padding: 0.5rem;
-            border-radius: 0.3rem;
-            border: 0.1rem;
-            border-style: solid;
-            color: var(--cor-da-fonte);
-        }
-
-            button{
-                padding: 0.5rem;
-                background-color: var(--cor-botoes);
-                color: var(--cor-da-fonte);
-                border-radius: 0.3rem;
-                border-style: none;
-                cursor: pointer;
-            }
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
 }
 
-footer{
-    padding: 1.5rem;
-    font-size: 0.8rem;
-    max-height: 10vh;
-
-        a{
-            color: var(--cor-da-fonte);
-        }
+.formulario_cadastro-produtos button:hover{
+    background-color: #5e06f6;
+    transform: scale(1.05);
 }
+
+.produtos_cadastrados {
+    min-width: 50%;
+    min-height: 100%;
+    padding: 2rem;
+    border-radius: 0.3rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-items: center;
+}
+
+.produtos_cadastrados h2{
+    font-size: x-large;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.produtos_cadastrados table{
+    width: 100%;
+    height: 100%;
+    border-spacing: 0px;
+}
+
+.produtos_cadastrados th{
+    background-color: var(--cor-botoes);
+    font-size: medium;
+    height: 4vh;
+    border-top-left-radius: 0.5rem;
+    border-top-right-radius: 0.5rem;
+    border: solid 1px white;
+    padding: 0.3rem;
+}
+
+
+.produtos_cadastrados td{
+    border-right: solid 1px white;
+    border-left: solid 1px white;
+    padding: 0.3rem;
+    text-align: center;
+    font-size: small;
+    height: 3vh;
+}
+
+.produtos_cadastrados .borda_final{
+    border-bottom: solid 1px white;
+    border-bottom-left-radius: 0.5rem;
+    border-bottom-right-radius: 0.5rem;
+}
+
+.produtos_cadastrados button{
+    margin: 0.3rem;
+    padding: 0.5rem;
+    border: none;
+    border-radius: 0.5rem;
+    color: #F8FAFC;
+    background-color: var(--cor-botoes);
+    cursor: pointer;
+}
+
+.produtos_cadastrados button:hover{
+    background-color: #5e06f6;
+    transform: scale(1.05);
+}
+/* FORMULARIO DE CADASTRO DE PRODUTOS E TABELA DE USUARIOS CADASTRADOS */
+
+/* SOBRE O AUTOR */
+.sobre_o_autor{
+    min-width: 70%;
+    max-width: 70%;
+    min-height: 70%;
+    max-height: 70%;
+    background-color: var(--cor-container);
+    padding: 2rem;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    border-radius: 0.5rem;
+    justify-self: center;
+    align-self: center;
+}
+
+.sobre_o_autor h1{
+    font-size: xx-large;
+    padding-bottom: 1rem;
+}
+
+.sobre_o_autor h3{
+    font-size: x-large;
+    padding-bottom: 1rem;
+}
+
+.sobre_o_autor p{
+    font-size: large;
+}
+
+.sobre_o_autor fieldset{
+    width: 100%;
+    height: 100%;
+    padding: 2rem;
+    border: solid 2px #F8FAFC;
+    border-radius: 0.3rem;
+    text-align: justify;
+}
+
+.sobre_o_autor fieldset legend{
+    padding-left: 1rem;
+    padding-right: 1rem;
+    font-weight: bold;
+    color: #F8FAFC;
+}
+/* SOBRE O AUTOR */
