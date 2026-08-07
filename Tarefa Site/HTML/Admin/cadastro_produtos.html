@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GAMESMANIA/Cadastro de produtos</title>
+    <link rel="stylesheet" href="/CSS/style.css">
+</head>
+<body>
+    <header>
+        <span class="logo"><a href="/HTML/index.html">GAMESMANIA</a></span>
+        <nav>
+            <ul class="menu_de_navegação">
+                <li><a href="/HTML/index.html">Início</a></li>
+                <li><a href="cadastro_usuarios.html">Cadastro</a></li>
+                <li><a href="login.html">Login</a></li>
+            </ul>
+        </nav>
+    </header>
+    <hr>
+    <main class="container_formulario-cadastro_de_produtos">
+    <!--Lado esquerdo-->
+        <form class="formulario_cadastro-produtos">
+            <h2>Cadastrar Produto</h2>
+            <div class="campos_dados-produtos">
+                <label>Nome do Produto</label>
+                <input type="text">
+            </div>
+            <div class="campos_dados-produtos">
+                <label>Descrição</label>
+                <textarea name="descrição" ></textarea>
+            </div>
+            <div class="campos_dados-produtos">
+                <label>Preço</label>
+                <input type="text" id="preco" placeholder="R$ 0,00">
+            </div>
+            <div class="campos_dados-produtos">
+                <label>Categoria</label>
+                <select name="Cadastro" id="Cadastro">
+                    <option value="Gamer">Gamer</option>
+                    <option value="Simples">Simples</option>
+                </select>
+            </div>
+            <div class="campos_dados-produtos">
+                <label>Imagem do produto</label>
+                    <input type="file"  class="area_arquivo" placeholder="Você pode arrastar e soltar arquivos aqui para adicioná-los.">
+            </div>
+            <button>Cadastrar</button>
+        </form>
+         <br>
+         <!--Lado direito-->
+        <div class="produtos_cadastrados">
+            <h2>Produtos cadastrados</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Preço</th>
+                        <th>Categoria</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tr>
+                    <td>Mouse</td>
+                    <td>R$ 99,90</td>
+                    <td>Gamer</td>
+                    <td>
+                        <button>editar</button>
+                        <button>excluir</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Teclado</td>
+                    <td>R$ 114,90</td>
+                    <td>Gamer</td>
+                    <td>
+                        <button>editar</button>
+                        <button>excluir</button>
+                    </td>
+                </tr>
+                 <tr>
+                    <td>Headset</td>
+                    <td>R$ 145,90</td>
+                    <td>Gamer</td>
+                    <td>
+                        <button>editar</button>
+                        <button>excluir</button>
+                    </td>
+                </tr>
+                 <tr>
+                    <td>Mousepad XXL</td>
+                    <td>R$ 89,90</td>
+                    <td>Gamer</td>
+                    <td>
+                        <button>editar</button>
+                        <button>excluir</button>
+                    </td>
+                </tr>
+                 <tr>
+                    <td>Controle de Xbox</td>
+                    <td>R$ 449,90</td>
+                    <td>Gamer</td>
+                    <td>
+                        <button>editar</button>
+                        <button>excluir</button>
+                    </td>
+                </tr>
+                 <tr>
+                    <td>Webcam HD</td>
+                    <td>R$ 89,90</td>
+                    <td>Gamer</td>
+                    <td>
+                        <button>editar</button>
+                        <button>excluir</button>
+                    </td>
+                </tr>
+                 <tr>
+                    <td>monitor</td>
+                    <td>R$ 549,90</td>
+                    <td>Gamer</td>
+                    <td>
+                        <button>editar</button>
+                        <button>excluir</button>
+                    </td>
+                </tr>
+                 <tr>
+                    <td class="borda_final">Kit Gamer</td>
+                    <td class="borda_final">R$ 299,90</td>
+                    <td class="borda_final">Gamer</td>
+                    <td class="borda_final">
+                        <button>editar</button>
+                        <button>excluir</button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </main>
+    <hr>
+     <footer>
+        <p>&COPY;GAMESMANIA todos os direitos reservados</p>
+        <p>Criado por Lucas Andrade Freitas</p>
+        <p>Para saber mais sobre o autor <a href="/HTML/autor.html">clique aqui</a></p>
+    </footer>
