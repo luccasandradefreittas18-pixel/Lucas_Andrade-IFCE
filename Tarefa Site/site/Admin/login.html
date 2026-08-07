@@ -4,45 +4,46 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GAMESMANIA/Login</title>
+    <link rel="stylesheet" href="/CSS/style.css">
 </head>
     <body>
         <header>
+            <span class="logo"><a href="/HTML/index.html">GAMESMANIA</a></span>
             <nav>
-                    <span>GAMESMANIA</span>
-                <ul>
-                    <li><a href="">Home</a></li>
-                    <li><a href="/Tarefa Site/site/detalhes.html">Detalhes</a></li>
-                    <li><a href="cadastro.html">Cadastro</a></li>
-                    <li><a>login</a></li>
+                <ul class="menu_de_navegação">
+                    <li><a href="/HTML/index.html">Início</a></li>
+                    <li><a href="cadastro_usuarios.html">Cadastro</a></li>
+                    <li><a href="login.html">Login</a></li>
                 </ul>
             </nav>
         </header>
     <hr>
         <main>
-            <h1>Faça login ou Cadastre-se para ficar por dentro</h1>
-            <form>
-                <div>
-                    <label>E-mail
-                        <input type="email">
-                    </label>
+            <form class="formulario_de_login">
+                <h2>Faça login ou Cadastre-se.</h2>
+                <div class="campos_email-senha">
+                    <input type="email" placeholder="Usuário">
                 </div>
-                <div>
-                    <label>Senha
-                        <input type="password">
-                    </label>
+                <div class="campos_email-senha">
+                    <input type="password" placeholder="Senha">
+                </div>
+                <div class="checkbox_mostrar-senha">
+                    <label>
+                    <input type="checkbox">
+                    Mostrar senha.</label>
+                    <a href="">Esqueci minha senha</a>
                 </div>
                 <button>Entrar</button>
-            </form>
-                <div>
-                    <p><a href="login_cadast.html">Cadastre-se</a></p>
-                    <p><a href="">Esqueci minha senhas</a></p>
+                <div class="link_cadastro">
+                    <p>Ainda não tem uma conta?</p><a href="cadastro_usuarios.html">Cadastre-se</a>
                 </div>
+            </form>
         </main>
         <hr>
         <footer>
             <p>&copy;GAMESMANIA todos os direitos reservados</p>
             <p>Criado por Lucas Andrade Freitas</p>
-            <p>Para saber mais sobre o autor <a href="/Tarefa Site/site/autor.html">clique aqui.</a></p>
+            <p>Para saber mais sobre o autor <a href="/HTML/autor.html">clique aqui.</a></p>
         </footer>
     </body>
 </html>
