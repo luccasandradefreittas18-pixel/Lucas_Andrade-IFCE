@@ -1,10 +1,11 @@
 {
-  "name": "hello_node",
+  "name": "Games Mania",
   "version": "1.0.0",
   "description": "Hello Node.js",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js"
+    "start": "node app.js",
+    "dev": "node --watch app.js"
   },
   "keywords": [
     "Hello"
@@ -12,7 +13,6 @@
   "author": "Renato Lenz Costalima",
   "license": "Apache-2.0",
   "dependencies": {
-  },
-  "devDependencies": {
+    "express": "^5.2.1"
   }
 }

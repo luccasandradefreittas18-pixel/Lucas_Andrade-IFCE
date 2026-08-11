@@ -4,7 +4,7 @@ services:
   node:
     build: .
     ports:
-      - "82:3000"
+      - "83:3000"
     volumes:
       - ./app:/home/node/app
       - /home/node/app/node_modules
