@@ -13,6 +13,7 @@
   "author": "Renato Lenz Costalima",
   "license": "Apache-2.0",
   "dependencies": {
+    "body-parser": "^2.3.0",
     "express": "^5.2.1"
   }
 }
