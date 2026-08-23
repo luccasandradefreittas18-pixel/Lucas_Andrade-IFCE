@@ -7,12 +7,14 @@ var bodyParser = require('body-parser');
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.get('/', (req, res) => {
+app.get('/Autor', (req, res) => {
   res.send('Lucas Andrade!')
+  console.log('Lucas Andrade!')
 })
 
-app.get('/sobre', (req, res) => {
-  res.send('sobre!')
+app.get('/Sobre', (req, res) => {
+  res.send('Lucas Andrade nascido em Paraipaba Ceará!')
+  console.log('Lucas Andrade nascido em Paraipaba Ceará!')
 })
 
 app.post('/Admin/Produtos', (req, res) => {
