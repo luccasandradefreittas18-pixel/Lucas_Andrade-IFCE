@@ -21,30 +21,30 @@
     <hr>
     <main class="container_formulario-cadastro_de_produtos">
     <!--Lado esquerdo-->
-        <form class="formulario_cadastro-produtos">
+        <form class="formulario_cadastro-produtos" action="/Admin/Produtos" method="POST">
             <h2>Cadastrar Produto</h2>
             <div class="campos_dados-produtos">
                 <label>Nome do Produto</label>
-                <input type="text">
+                <input type="text" name="nome" id="nome">
             </div>
             <div class="campos_dados-produtos">
                 <label>Descrição</label>
-                <textarea name="descrição" ></textarea>
+                <textarea name="descricao" id="descricao"></textarea>
             </div>
             <div class="campos_dados-produtos">
                 <label>Preço</label>
-                <input type="text" id="preco" placeholder="R$ 0,00">
+                <input type="text" name="preco" id="preco" placeholder="R$ 0,00">
             </div>
             <div class="campos_dados-produtos">
                 <label>Categoria</label>
-                <select name="Cadastro" id="Cadastro">
+                <select name="categoria" id="categoria">
                     <option value="Gamer">Gamer</option>
                     <option value="Simples">Simples</option>
                 </select>
             </div>
             <div class="campos_dados-produtos">
                 <label>Imagem do produto</label>
-                    <input type="file"  class="area_arquivo" placeholder="Você pode arrastar e soltar arquivos aqui para adicioná-los.">
+                    <input type="file" name="imagem" id="imagem" class="area_arquivo">
             </div>
             <button>Cadastrar</button>
         </form>

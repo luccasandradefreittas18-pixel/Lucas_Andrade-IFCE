@@ -16,9 +16,15 @@ app.get('/sobre', (req, res) => {
 })
 
 app.post('/Admin/Produtos', (req, res) => {
-  console.log(req.body);
-  const {nome, email} = req.body;
-  res.send('Admin!')
+  const { nome, descricao, preco, categoria } = req.body;
+
+  console.log('Novo produto recebido:');
+  console.log('Nome:', nome);
+  console.log('Descrição:', descricao);
+  console.log('Preço:', preco);
+  console.log('Categoria:', categoria);
+
+  res.send('Produto cadastrado com sucesso!')
 })
 
 app.listen(port, () => {
