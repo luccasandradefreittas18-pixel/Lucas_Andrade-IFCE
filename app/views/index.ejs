@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Games Mania</title>
+    <meta name="descripition" content="Uma loja de acessorios de alta qualidade">
+    <link rel="stylesheet" href="/CSS/style.css">
+</head>
+<body>
+    <header>
+        <span class="logo"><a href="/index.html">GAMESMANIA</a></span>
+        <nav>
+            <ul class="menu_de_navegação">
+                <li><a href="index.html">Início</a></li>
+                <li><a href="Admin/cadastro_usuarios.html">Cadastre-se</a></li>
+                <li><a href="Admin/cadastro_produtos.html">Produtos</a></li>
+                <li><a href="Admin/login.html">Login</a></li>
+            </ul>
+        </nav>
+    </header>
+    <hr>
+    <main>
+        <section class="baner1">
+            <div class="texto_baner1">
+                <h1>Equipamentos de Elite</h1>
+                <p>Explore nossa seleção de acessórios de alta performance. 
+                    Desde o controle de precisão absoluta até fones de ouvido de imersão total, todos os equipamentos foram testados para garantir que sua experiência de jogo seja perfeita.</p>
+            </div>
+            <div class="img_baner1">
+                <img src="/imagens/imagem1.svg" alt="Uma imagen de um ambiente gamer"><br>
+            </div><br>
+        </section>
+        <section class="container_de_produtos">
+<% for (let produto of produtos) { %>
+            <div class="cards">
+                <img src="/imagens/imagem2.svg" alt="Mouse Gamer">
+                <h3><%= produto.nome %>Mouse Gamer</h3>
+                <p class="preço_produtos">R$ 99,90</p>
+                <a href="detalhes.html"><button>Ver detalhes</button></a>
+            </div>
+                
+                <div>P: <%= produto.nome %>, <%= produto.desconto %></div>
+<% } %>
+
+
+        </section>
+        <section class="baner2">
+            <div class="texto_baner2">
+                <h2>A Nossa história e compromisso com a Comunidade Gamer</h2>
+                <p>Na Games mania, acreditamos que o verdadeiro sucesso de um jogador vem do equipamento que ele usa. Fundada para elevar o padrão do entretenimento, nossa missão é fornecer acessórios de alta performace que não apenas acompanham sua jornada, mas impulsionam cada conquista . Combinamos tecnologia de ponta com uma comunidade vibrante para garantir que cada gamer o que precisa para dominar o jogo.</p>
+            </div>
+            <div class="img_baner2">
+                <img src="/imagens/imagem10.svg" alt="Uma imagen de um ambiente gamers">
+            </div><br>
+        </section>
+        <section class="formulario_completo">
+            <!--Lado Esquerdo-->
+            <div class="form_esquerdo">
+               <h2>Entre em Contato</h2>
+               <div>
+                    <h3>localização</h3>
+                    <p>Ceará, Brasil</p>
+                </div>
+                <div>
+                    <h3>E-mail</h3>
+                    <p>contato@gamesmania.com</p>
+                </div>
+            </div>
+            <!--Lado Direito-->
+            <form class="form_direito">
+                <div class="container_nome-email">
+                    <div class="campo_nome">
+                        <label>Nome*</label>
+                        <input type="text">
+                    </div>
+                    <div class="campo_email">
+                        <label>E-mail*</label>
+                        <input type="email">
+                    </div>
+                </div>
+                <div class="container_assunto-mensagem">
+                    <div class="campo_assunto">
+                        <label>Assunto*</label>
+                        <input type="text">
+                    </div>
+                    <div class="campo_mensagem">
+                        <label>Mensagem*</label>
+                        <textarea></textarea>
+                    </div>
+                </div>
+                <button>Enviar</button>
+            </form>
+        </section>
+    </main> 
+    <hr>
+    <footer>
+        <p>&copy;GAMESMANIA todos os direitos reservados.</p>
+        <p>Criado por Lucas Andrade Freitas.</p>
+        <p>Para saber mais sobre o autor <a href="/autor.html">clique aqui.</a></p>
+    </footer>
