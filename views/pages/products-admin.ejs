@@ -40,7 +40,14 @@
     <h2>Produtos cadastrados <span class="contador"><%= produtos.length %></span></h2>
     <div class="tabela-wrap">
       <table class="tabela">
-        <thead><tr><th>Nome</th><th class="numerico">Preco</th><th>Categoria</th><th>Acoes</th></tr></thead>
+        <thead>
+          <tr>
+            <th>Nome</th>
+            <th class="numerico">Preço</th>
+            <th>Categoria</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
         <tbody>
           <% if (produtos.length === 0) { %>
             <tr><td colspan="4" class="vazio">Nenhum produto cadastrado.</td></tr>
