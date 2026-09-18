@@ -1,107 +1,225 @@
-# Hello, Node
-É um repositório com fins educativos. Node.js + Docker-Compose.
+# GAMESMANIA
 
-# Preparar o ambiente
-Certifique-se que o Git e Docker-compose estão instalados e configurados. Veja mais [Instalação do Git e Docker-compose](/docs/INSTALACOES.md).
+Aplicacao Node.js + Express da loja de acessorios gamer GAMESMANIA, reescrita a
+partir das paginas estaticas originais (`index2.html`, `detalhes.html`,
+`autor.html`, `cadastro_produtos.html`, `cadastro_usuarios.html`, `login.html`)
+em arquitetura **MVC**, com templates HTML separados (EJS) e suporte a Docker.
 
-## Clonar repositório base
-Passo 1: Crie um repositório para o seu projeto no Github, Gitlab ou similar.
+## Como rodar
 
-Passo 2: Em seguida, faça um clone do repositório de exemplo em uma pasta com o nome do seu projeto.
-```sh
-# usando SSH
-git clone git@github.com:macaroots/hello_node.git NOVO_PROJETO
+### Opcao 1 — Node.js direto
 
-# ou usando HTTPS
-git clone https://github.com/macaroots/hello_node.git NOVO_PROJETO
+```bash
+npm install
+npm start
 ```
 
-Altere a URL do repositório remoto apontando para o seu:
-```sh
-# listar repositórios remotos
-git remote -v
+A aplicacao sobe em `http://localhost:3000` (porta configuravel via `PORT`).
 
-# alterar repositório remoto
-# git remote set-url NOME URL
-git remote set-url origin git@github.com:<USUARIO>/<NOVO_PROJETO>.git
+### Opcao 2 — Docker Compose (recomendado)
+
+```bash
+docker compose up --build
 ```
 
-Entrar na pasta e iniciar os serviços:
-```sh
-cd NOVO_PROJETO
-docker-compose up
-```
-```sh
-git clone REPO_BASE NOVO_PROJETO
-git remote --set-url origin NOVO_REPO # alterar repositório remoto
-```
+Acesse `http://localhost:3000`. Para parar: `Ctrl+C` ou `docker compose down`.
 
-## Configurar porta
-A aplicação `app.js` escuta a porta 3000 do container onde ela está sendo executada. Alterando o `docker-compose.yml`, podemos associar a porta 3000 do container a qualquer porta da máquina hospedeira, onde o container está sendo executado.
-```yml
-    ports:
-      - "NOVA_PORTA:3000"
+### Opcao 3 — Docker "na mao"
+
+```bash
+docker build -t gamesmania .
+docker run -p 3000:3000 -e SESSION_SECRET=troque-este-segredo gamesmania
 ```
 
-## Executar
-Para ligar o servidor:
-```sh
-docker-compose up
+### Acesso administrativo inicial
+
 ```
-Para desligar, pressione `ctrl+c`.
-
-## Acessar
-Acesse pelo navegador http://localhost:3000.
-
-# Primeiro Servidor Dinâmico
-## Estrutura dos arquivos
-<pre>
-|-- docker-compose.yml (Descreve os containers)
-|-- Dockerfile (Instruções para criação da imagem)
-|-- .dockerignore (Arquivos ignorados pelo Docker)
-|-- .gitignore (Arquivos ignorados pelo Git)
-|-- app/
-|   |-- <b>app.js (Seu servidor dinâmico)</b>
-|   |-- package.json (Descreve seu pacote)
-</pre>
-
-Um servidor web é um programa para atender requisições HTTP. O servidor mais simples possível em Node.js (`app.js`) fica assim:
-```js
-const http = require('http');
-
-const PORT = 3000;
-const server = http.createServer((req, res) => {
-    res.writeHead(200, {'Content-Type': 'text/plain'});
-    res.write('Hello, ' + req.url + '!\n');
-    res.end();
-});
-
-server.listen(PORT, () => {
-  console.log(`Server listening on port ${PORT}`);
-});
-```
-Perceba que declaramos uma função para tratar as requisições e esta função recebe um objeto de requisição (`req`) e outro de resposta (`res`). Escrevemos no cabeçalho da resposta o código de status (200) e o tipo de conteúdo "text/plain" com a função `res.writeHead()`. Escrevemos no corpo da resposta com a função `res.write()`. `res.end()` finaliza a resposta.
-
-## Instalar Nodemon e outras dependências
-
-Experimente alterar o arquivos `app.js` e recarregar a página no navegador. Perceba que nada se altera. É preciso desligar (Ctrl+C) e reiniciar o servidor.
-
-Para evitar ficar reiniciando o servidor o tempo todo, você pode instalar o Nodemon, que fica monitorando quando algum arquivo é modificado e reinicia o servidor automaticamente.
-
-A instalação de pacotes é feita pelo gerenciador de pacotes NPM, com o comando `npm install`. Como a aplicação está rodando dentro do container, vamos ligar o servidor (`docker-compose up`) e executar um comando de instalação dentro do container com `docker exec`. 
-```sh
-# para executar qualquer comando no container:
-# docker exec -it CONTAINER COMANDO
-docker exec -it hello_node_node_1 npm install nodemon
+E-mail: admin@gamesmania.com
+Senha:  admin123
 ```
 
-Abra o arquivo `package.json` e confirme que o Nodemon foi adicionado às dependências do projeto. Em seguida, altere o script de inicialização do servidor para:
-```js
-  // ...
-  "scripts": {
-    "start": "nodemon app.js"
-  },
-  // ...
+Esse usuario e criado automaticamente na inicializacao (em memoria). Novos
+cadastros feitos pela pagina "Cadastre-se" entram sempre como `cliente`;
+apenas um admin logado pode promover alguem a `admin` (na tela de edicao de
+usuarios).
+
+## Estrutura (MVC)
+
+```
+gamesmania/
+├── server.js                  # ponto de entrada / configuracao do Express
+├── Dockerfile                 # imagem Node 20 Alpine
+├── docker-compose.yml         # build + run com uma variavel de ambiente
+├── .dockerignore
+├── models/                    # Model: dados e regras de armazenamento
+│   ├── productModel.js        #   produtos ("temas")
+│   ├── categoryModel.js       #   categorias
+│   ├── userModel.js           #   usuarios + hash de senha (scrypt)
+│   └── contactModel.js        #   mensagens do formulario de contato
+├── views/                     # View: arquivos HTML (.ejs) separados por pagina
+│   ├── helpers.js             #   funcoes auxiliares expostas aos templates
+│   ├── partials/
+│   │   ├── top.ejs            #   <head>, cabecalho, menu e abertura do <main>
+│   │   └── bottom.ejs         #   fechamento do <main>, rodape e <script>
+│   └── pages/
+│       ├── home.ejs
+│       ├── product.ejs
+│       ├── products-admin.ejs
+│       ├── product-form.ejs
+│       ├── categories.ejs
+│       ├── category-form.ejs
+│       ├── users.ejs
+│       ├── user-form.ejs
+│       ├── login.ejs
+│       ├── recover-password.ejs
+│       ├── author.ejs
+│       ├── message.ejs
+│       └── 404.ejs
+├── controllers/                # Controller: logica de GET/POST/PUT/DELETE
+│   ├── productController.js
+│   ├── categoryController.js
+│   ├── userController.js
+│   ├── authController.js
+│   ├── pageController.js
+│   └── negotiate.js            # helper de content negotiation (HTML x JSON)
+├── middlewares/
+│   └── auth.js                 # exigirLogin / exigirAdmin
+├── routes/                     # Rotas Express -> Controller
+│   ├── pageRoutes.js
+│   ├── authRoutes.js
+│   ├── userRoutes.js
+│   ├── productRoutes.js
+│   └── categoryRoutes.js
+└── public/                     # arquivos estaticos
+    ├── css/style.css
+    ├── js/main.js
+    └── imagens/*.svg
 ```
 
-Reinicie o servidor. Repare que ao salvar qualquer arquivo, o servidor é reiniciado automaticamente.
+Os dados ficam em memoria (arrays dentro dos arquivos de `models/`), ou seja,
+reiniciar o servidor (ou o container) restaura o estado inicial.
+
+## Sobre os templates (`views/`)
+
+O HTML de cada pagina agora fica em um arquivo `.ejs` proprio dentro de
+`views/pages/`, em vez de strings dentro de um arquivo `.js` (como estava na
+versao anterior). Os controllers so chamam `res.render("pages/nome", dados)`
+— nenhum HTML fica hardcoded no controller.
+
+`views/partials/top.ejs` e `bottom.ejs` guardam o que se repete em toda
+pagina (cabecalho, menu, rodape). Cada pagina inclui os dois:
+
+```ejs
+<%- include("../partials/top", { title: "Inicio", active: "inicio" }) %>
+  ... conteudo especifico da pagina ...
+<%- include("../partials/bottom") %>
+```
+
+`usuario` (quem esta logado) e disponibilizado automaticamente para todo
+template por um middleware em `server.js` — nao precisa passar isso em cada
+`res.render`. `formatarPreco` fica em `app.locals` pelo mesmo motivo.
+
+O EJS escapa `<%= %>` automaticamente (protege contra XSS); use `<%- %>`
+apenas quando o conteudo ja for HTML de confianca (como os `include`).
+
+## Rotas
+
+### Publicas
+
+| Metodo | Rota                | Descricao                                             |
+|--------|---------------------|--------------------------------------------------------|
+| GET    | `/`                 | Pagina inicial, catalogo dinamico (aceita `?categoria=ID`) |
+| GET    | `/tema/:id`         | Pagina de detalhes de um produto                       |
+| GET    | `/autor`            | Pagina "Sobre o autor"                                 |
+| POST   | `/contato`          | Envio do formulario de contato                         |
+| GET    | `/usuarios/novo`    | Formulario "Cadastre-se"                               |
+| POST   | `/usuarios`         | Cria um usuario (cliente) e ja inicia a sessao         |
+| GET    | `/login`            | Tela de login (aceita `?proximo=/rota`)                |
+| POST   | `/login`            | Autentica e cria a sessao                              |
+| POST   | `/logout`           | Encerra a sessao                                       |
+| GET    | `/sessao`           | JSON com o usuario logado (ou `null`)                  |
+| GET    | `/recuperar-senha`  | Formulario "Esqueci minha senha"                       |
+| POST   | `/recuperar-senha`  | Confirmacao (envio de e-mail nao implementado)          |
+| GET    | `/categorias`       | Lista de categorias — **somente em JSON**              |
+
+### Administrativas (exigem login de admin)
+
+| Metodo | Rota                     | Descricao                                    |
+|--------|--------------------------|-----------------------------------------------|
+| GET    | `/produtos`              | Cadastro de produtos: formulario + tabela     |
+| POST   | `/produtos`              | Cria um produto                               |
+| GET    | `/produtos/novo`         | Formulario de cadastro isolado                |
+| GET    | `/produtos/:id/editar`   | Formulario de edicao                          |
+| PUT    | `/produtos/:id`          | Atualiza um produto                           |
+| DELETE | `/produtos/:id`          | Remove um produto                             |
+| GET    | `/categorias`            | Gerenciamento de categorias (HTML)            |
+| POST   | `/categorias`            | Cria uma categoria                            |
+| GET    | `/categorias/:id/editar` | Formulario de edicao                          |
+| PUT    | `/categorias/:id`        | Atualiza uma categoria                        |
+| DELETE | `/categorias/:id`        | Remove (bloqueado se houver produtos usando-a) |
+| GET    | `/usuarios`              | Cadastro de usuarios: formulario + tabela     |
+
+### Exigem login (proprio usuario ou admin)
+
+| Metodo | Rota                     | Descricao                                    |
+|--------|--------------------------|-----------------------------------------------|
+| GET    | `/usuarios/:id/editar`   | Edicao do cadastro                            |
+| PUT    | `/usuarios/:id`          | Atualiza o cadastro                           |
+| DELETE | `/usuarios/:id`          | Remove (bloqueia excluir o unico admin)       |
+
+Como formularios HTML nao suportam `PUT`/`DELETE`, essas rotas sao acionadas
+via `method-override` (`?_method=PUT` ou `?_method=DELETE`).
+
+## Autenticacao
+
+- Sessao com `express-session` (cookie `httpOnly`, validade de 8 horas).
+- Senhas nunca sao guardadas em texto puro: `crypto.scryptSync` com salt
+  aleatorio por usuario, comparacao com `timingSafeEqual`.
+- `senhaHash` e `senhaSalt` nunca aparecem nas respostas JSON nem no HTML.
+- Sem login, rotas administrativas redirecionam para `/login?proximo=...` (HTML)
+  ou retornam `401` (JSON); logado sem ser admin, retornam `403`.
+- O menu do cabecalho muda conforme a sessao: visitantes veem "Cadastre-se" e
+  "Entrar"; admins veem "Produtos", "Categorias", "Usuarios" e "Sair".
+
+## Content negotiation
+
+Todas as rotas verificam o cabecalho `Accept` (`controllers/negotiate.js`):
+
+- `Accept: application/json` → resposta em JSON (API)
+- qualquer outro caso → pagina HTML renderizada pelos templates `.ejs`
+
+```bash
+curl -c cookies.txt -H "Accept: application/json" \
+  -d "email=admin@gamesmania.com&senha=admin123" http://localhost:3000/login
+
+curl -b cookies.txt -H "Accept: application/json" http://localhost:3000/usuarios
+```
+
+## Frontend
+
+- `public/css/style.css`: layout responsivo (grid/flexbox), tema escuro tipo
+  "painel de controle". O painel admin usa formulario a esquerda e tabela a
+  direita, empilhando em telas menores; tabelas viram cartoes no celular.
+- `public/js/main.js`: menu mobile, confirmacao antes de excluir, checkbox
+  "Mostrar senha", conferencia das senhas no cadastro, mascara de telefone
+  `(00) 00000-0000` e envio do formulario de contato via `fetch`.
+
+## Docker
+
+O `Dockerfile` usa `node:20-alpine`, copia primeiro `package*.json` (para
+aproveitar cache de camadas), instala apenas dependencias de producao e roda
+como usuario sem privilegios. Variaveis de ambiente aceitas:
+
+| Variavel         | Padrao                                    | Uso                                  |
+|------------------|--------------------------------------------|---------------------------------------|
+| `PORT`           | `3000`                                     | Porta em que o Express escuta         |
+| `SESSION_SECRET` | valor de desenvolvimento (troque em prod) | Assina o cookie de sessao do login    |
+
+Como os dados sao em memoria, cada `docker compose up` (ou `docker run`) novo
+comeca com o catalogo padrao e o admin `admin@gamesmania.com` / `admin123`.
+
+## Observacoes
+
+- O campo de imagem do produto recebe o **caminho** do arquivo
+  (ex.: `/imagens/mouse.svg`). Upload real de arquivo exigiria `multer`.
+- A recuperacao de senha exibe a confirmacao, mas nao envia e-mail.

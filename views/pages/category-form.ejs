@@ -1,0 +1,25 @@
+<%
+  var editando = typeof categoria !== "undefined" && categoria;
+  var acao = editando ? "/categorias/" + categoria.id + "?_method=PUT" : "/categorias";
+%>
+<%- include("../partials/top", { title: editando ? "Editar categoria" : "Nova categoria", active: "categorias" }) %>
+
+<section class="secao secao-estreita">
+  <h1><%= editando ? "Editar categoria" : "Nova categoria" %></h1>
+  <% if (typeof erro !== "undefined" && erro) { %><p class="form-erro"><%= erro %></p><% } %>
+  <form class="formulario" method="POST" action="<%= acao %>">
+    <% if (editando) { %><input type="hidden" name="_method" value="PUT"><% } %>
+    <label>Nome*
+      <input type="text" name="nome" required value="<%= editando ? categoria.nome : "" %>">
+    </label>
+    <label>Descricao
+      <textarea name="descricao" rows="3"><%= editando ? categoria.descricao : "" %></textarea>
+    </label>
+    <div class="formulario-acoes">
+      <button type="submit" class="botao botao-primario"><%= editando ? "Salvar alteracoes" : "Cadastrar categoria" %></button>
+      <a class="botao botao-outline" href="/categorias">Cancelar</a>
+    </div>
+  </form>
+</section>
+
+<%- include("../partials/bottom") %>

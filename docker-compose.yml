@@ -1,10 +1,12 @@
-version: '3'
-
 services:
-  node:
+  gamesmania:
     build: .
+    container_name: gamesmania
     ports:
-      - "83:3000"
-    volumes:
-      - ./app:/home/node/app
-      - /home/node/app/node_modules
+      - "3000:3000"
+    environment:
+      - PORT=3000
+      # Troque por um valor proprio em producao (usado para assinar o
+      # cookie de sessao do login).
+      - SESSION_SECRET=troque-este-segredo-em-producao
+    restart: unless-stopped

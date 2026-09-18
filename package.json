@@ -1,0 +1,17 @@
+{
+  "name": "gamesmania",
+  "version": "1.0.0",
+  "description": "GAMESMANIA - loja de acessorios gamer, aplicacao Node.js + Express em arquitetura MVC",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "ejs": "^6.0.1",
+    "express": "^4.19.2",
+    "express-session": "^1.19.0",
+    "method-override": "^3.0.0"
+  }
+}

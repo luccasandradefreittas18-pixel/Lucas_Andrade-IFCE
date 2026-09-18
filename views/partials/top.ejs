@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GAMESMANIA — <%= title %></title>
+  <meta name="description" content="Loja de acessorios gamer de alta performance">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <a class="pular-conteudo" href="#conteudo-principal">Pular para o conteudo</a>
+  <header class="topo">
+    <div class="topo-faixa">
+      <span class="logo"><a href="/">GAMES<span>MANIA</span></a></span>
+      <button class="menu-alterna" id="menu-alterna" aria-expanded="false" aria-controls="menu-principal">
+        <span></span><span></span><span></span>
+        <span class="sr-only">Abrir menu</span>
+      </button>
+      <nav id="menu-principal" class="menu-principal">
+        <ul>
+          <li><a href="/"<%= active === "inicio" ? ' class="ativo" aria-current="page"' : "" %>>Inicio</a></li>
+          <% if (usuario && usuario.papel === "admin") { %>
+            <li><a href="/produtos"<%= active === "produtos" ? ' class="ativo" aria-current="page"' : "" %>>Produtos</a></li>
+            <li><a href="/categorias"<%= active === "categorias" ? ' class="ativo" aria-current="page"' : "" %>>Categorias</a></li>
+            <li><a href="/usuarios"<%= active === "usuarios" ? ' class="ativo" aria-current="page"' : "" %>>Usuarios</a></li>
+          <% } %>
+          <% if (!usuario) { %>
+            <li><a href="/usuarios/novo"<%= active === "cadastro" ? ' class="ativo" aria-current="page"' : "" %>>Cadastre-se</a></li>
+          <% } %>
+          <li><a href="/autor"<%= active === "autor" ? ' class="ativo" aria-current="page"' : "" %>>Sobre o autor</a></li>
+        </ul>
+      </nav>
+      <% if (usuario) { %>
+        <div class="topo-usuario">
+          <span class="topo-usuario-nome"><%= usuario.nome.split(" ")[0] %></span>
+          <form method="POST" action="/logout"><button class="botao botao-pequeno botao-outline" type="submit">Sair</button></form>
+        </div>
+      <% } else { %>
+        <a class="botao botao-pequeno botao-primario" href="/login">Entrar</a>
+      <% } %>
+    </div>
+  </header>
+
+  <% if (typeof flash !== "undefined" && flash) { %>
+    <div class="flash"><%= flash %></div>
+  <% } %>
+
+  <main id="conteudo-principal">

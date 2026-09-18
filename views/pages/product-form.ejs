@@ -1,0 +1,42 @@
+<%
+  var editando = typeof produto !== "undefined" && produto;
+  var acao = editando ? "/produtos/" + produto.id + "?_method=PUT" : "/produtos";
+%>
+<%- include("../partials/top", { title: editando ? "Editar produto" : "Novo produto", active: "produtos" }) %>
+
+<section class="secao secao-estreita">
+  <h1><%= editando ? "Editar produto" : "Novo produto" %></h1>
+  <% if (typeof erro !== "undefined" && erro) { %><p class="form-erro"><%= erro %></p><% } %>
+  <form class="formulario" method="POST" action="<%= acao %>">
+    <% if (editando) { %><input type="hidden" name="_method" value="PUT"><% } %>
+    <label>Nome*
+      <input type="text" name="nome" required value="<%= editando ? produto.nome : "" %>">
+    </label>
+    <label>Preco (R$)*
+      <input type="number" name="preco" step="0.01" min="0" required value="<%= editando ? produto.preco : "" %>">
+    </label>
+    <label>Categoria*
+      <select name="categoriaId" required>
+        <option value="">Selecione...</option>
+        <% categorias.forEach(function (c) { %>
+          <option value="<%= c.id %>"<%= (editando && Number(produto.categoriaId) === c.id) ? " selected" : "" %>><%= c.nome %></option>
+        <% }) %>
+      </select>
+    </label>
+    <label>Imagem (caminho)
+      <input type="text" name="imagem" placeholder="/imagens/produto.svg" value="<%= editando ? produto.imagem : "" %>">
+    </label>
+    <label>Descricao curta*
+      <input type="text" name="descricaoCurta" required value="<%= editando ? produto.descricaoCurta : "" %>">
+    </label>
+    <label>Descricao completa
+      <textarea name="descricaoCompleta" rows="5"><%= editando ? produto.descricaoCompleta : "" %></textarea>
+    </label>
+    <div class="formulario-acoes">
+      <button type="submit" class="botao botao-primario"><%= editando ? "Salvar alteracoes" : "Cadastrar produto" %></button>
+      <a class="botao botao-outline" href="/produtos">Cancelar</a>
+    </div>
+  </form>
+</section>
+
+<%- include("../partials/bottom") %>

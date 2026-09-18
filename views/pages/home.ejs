@@ -1,0 +1,76 @@
+<%- include("../partials/top", { title: "Inicio", active: "inicio" }) %>
+
+<section class="hero">
+  <div class="hero-texto">
+    <p class="hero-eyebrow">Catalogo tecnico</p>
+    <h1>Equipamentos de elite para quem joga para valer</h1>
+    <p>Periféricos testados sob pressao competitiva: precisao de mira, resposta de tecla e audio que nao falha na hora decisiva.</p>
+    <a class="botao botao-primario" href="#catalogo">Ver catalogo</a>
+  </div>
+  <div class="hero-painel" aria-hidden="true">
+    <div class="hero-linha"></div>
+    <div class="hero-linha"></div>
+    <div class="hero-linha"></div>
+  </div>
+</section>
+
+<section id="catalogo" class="secao">
+  <div class="secao-cabecalho">
+    <h2>Catalogo</h2>
+    <% if (usuario && usuario.papel === "admin") { %>
+      <a href="/produtos" class="botao botao-outline">Cadastrar produtos</a>
+    <% } %>
+  </div>
+
+  <div class="filtro-categorias">
+    <a href="/" class="pill<%= !categoriaAtivaId ? " pill-ativa" : "" %>">Todos</a>
+    <% categorias.forEach(function (c) { %>
+      <a href="/?categoria=<%= c.id %>" class="pill<%= Number(categoriaAtivaId) === c.id ? " pill-ativa" : "" %>"><%= c.nome %></a>
+    <% }) %>
+  </div>
+
+  <div class="grade-produtos">
+    <% if (produtos.length === 0) { %>
+      <p class="vazio">Nenhum produto encontrado nesta categoria.</p>
+    <% } %>
+    <% produtos.forEach(function (p) { %>
+      <% var categoria = categorias.find(function (c) { return c.id === p.categoriaId; }); %>
+      <article class="produto-card">
+        <a href="/tema/<%= p.id %>" class="produto-card-link">
+          <div class="produto-thumb"><img src="<%= p.imagem %>" alt="<%= p.nome %>" loading="lazy"></div>
+          <p class="produto-categoria-tag"><%= categoria ? categoria.nome : "Sem categoria" %></p>
+          <h3><%= p.nome %></h3>
+          <p class="produto-preco">R$ <%= formatarPreco(p.preco) %></p>
+        </a>
+        <a class="botao botao-secundario" href="/tema/<%= p.id %>">Ver detalhes</a>
+      </article>
+    <% }) %>
+  </div>
+</section>
+
+<section class="secao secao-historia">
+  <div>
+    <h2>Nossa historia e compromisso com a comunidade gamer</h2>
+    <p>Acreditamos que o verdadeiro resultado de um jogador vem do equipamento que ele usa. Combinamos tecnologia de ponta com uma comunidade vibrante para garantir que cada gamer tenha o que precisa para dominar o jogo.</p>
+  </div>
+</section>
+
+<section class="secao secao-contato">
+  <div class="contato-info">
+    <h2>Entre em contato</h2>
+    <div><h3>Localizacao</h3><p>Ceara, Brasil</p></div>
+    <div><h3>E-mail</h3><p>contato@gamesmania.com</p></div>
+  </div>
+  <form class="contato-form" id="form-contato" method="POST" action="/contato">
+    <div class="campo-duplo">
+      <label>Nome*<input type="text" name="nome" required></label>
+      <label>E-mail*<input type="email" name="email" required></label>
+    </div>
+    <label>Assunto*<input type="text" name="assunto" required></label>
+    <label>Mensagem*<textarea name="mensagem" rows="4" required></textarea></label>
+    <button type="submit" class="botao botao-primario">Enviar</button>
+    <p class="form-resposta" id="contato-resposta" role="status"></p>
+  </form>
+</section>
+
+<%- include("../partials/bottom") %>

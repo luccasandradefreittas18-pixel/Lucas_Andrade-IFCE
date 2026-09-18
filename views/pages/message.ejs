@@ -1,0 +1,9 @@
+<%- include("../partials/top", { title: titulo, active: "" }) %>
+
+<section class="secao secao-estreita secao-erro">
+  <h1><%= titulo %></h1>
+  <p><%= mensagem %></p>
+  <a class="botao botao-primario" href="<%= typeof link !== "undefined" ? link : "/" %>"><%= typeof textoLink !== "undefined" ? textoLink : "Voltar para o inicio" %></a>
+</section>
+
+<%- include("../partials/bottom") %>
