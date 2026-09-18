@@ -13,7 +13,7 @@
         <label>Nome*
           <input type="text" name="nome" required value="<%= typeof valores !== "undefined" && valores ? valores.nome : "" %>">
         </label>
-        <label>Endereco
+        <label>Endereço
           <input type="text" name="endereco" value="<%= typeof valores !== "undefined" && valores ? valores.endereco : "" %>">
         </label>
       </div>
@@ -36,15 +36,22 @@
       <p class="form-resposta" id="senha-aviso" role="status"></p>
       <button type="submit" class="botao botao-primario">Cadastrar</button>
     </form>
-    <% if (!comTabela) { %><p class="apoio">Ja tem uma conta? <a href="/login">Entrar</a></p><% } %>
+    <% if (!comTabela) { %><p class="apoio">Já tem uma conta? <a href="/login">Entrar</a></p><% } %>
   </div>
 
   <% if (comTabela) { %>
     <div class="painel-tabela">
-      <h2>Usuarios cadastrados <span class="contador"><%= lista.length %></span></h2>
+      <h2>Usuários cadastrados <span class="contador"><%= lista.length %></span></h2>
       <div class="tabela-wrap">
         <table class="tabela">
-          <thead><tr><th>Nome</th><th>Endereco</th><th>E-mail</th><th class="numerico">Telefone</th><th>Perfil</th><th>Acoes</th></tr></thead>
+          <thead>
+            <tr>
+              <th>Nome</th>
+              <th>Endereço</th>
+              <th>E-mail</th>
+              <th class="numerico">Telefone</th><th>Perfil</th><th>Acoes</th>
+          </tr>
+          </thead>
           <tbody>
             <% if (lista.length === 0) { %>
               <tr><td colspan="6" class="vazio">Nenhum usuario cadastrado.</td></tr>

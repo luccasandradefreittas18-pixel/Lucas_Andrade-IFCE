@@ -2,7 +2,7 @@
 
 <section class="secao secao-login">
   <form class="cartao-login" method="POST" action="/login<%= proximo ? "?proximo=" + encodeURIComponent(proximo) : "" %>">
-    <h1>Faca login ou cadastre-se</h1>
+    <h1>Faça login ou cadastre-se</h1>
     <% if (typeof erro !== "undefined" && erro) { %><p class="form-erro"><%= erro %></p><% } %>
     <label>E-mail
       <input type="email" name="email" placeholder="Usuario" required value="<%= typeof email !== "undefined" ? email : "" %>">
@@ -18,7 +18,7 @@
       <a href="/recuperar-senha">Esqueci minha senha</a>
     </div>
     <button type="submit" class="botao botao-primario">Entrar</button>
-    <p class="apoio">Ainda nao tem uma conta? <a href="/usuarios/novo">Cadastre-se</a></p>
+    <p class="apoio">Ainda não tem uma conta? <a href="/usuarios/novo">Cadastre-se</a></p>
   </form>
 </section>
 

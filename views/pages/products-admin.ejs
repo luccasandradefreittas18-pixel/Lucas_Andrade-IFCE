@@ -9,14 +9,14 @@
       <label>Nome do produto*
         <input type="text" name="nome" required value="<%= typeof valores !== "undefined" && valores ? valores.nome : "" %>">
       </label>
-      <label>Descricao curta*
+      <label>Descrição curta*
         <input type="text" name="descricaoCurta" required value="<%= typeof valores !== "undefined" && valores ? valores.descricaoCurta : "" %>">
       </label>
-      <label>Descricao completa
+      <label>Descrição completa
         <textarea name="descricaoCompleta" rows="4"><%= typeof valores !== "undefined" && valores ? valores.descricaoCompleta : "" %></textarea>
       </label>
       <div class="campo-duplo">
-        <label>Preco (R$)*
+        <label>Preço (R$)*
           <input type="number" name="preco" step="0.01" min="0" required value="<%= typeof valores !== "undefined" && valores ? valores.preco : "" %>">
         </label>
         <label>Categoria*

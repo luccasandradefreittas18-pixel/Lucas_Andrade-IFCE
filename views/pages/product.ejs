@@ -1,7 +1,7 @@
 <%- include("../partials/top", { title: produto.nome, active: "" }) %>
 
 <nav class="trilha" aria-label="Trilha de navegacao">
-  <a href="/">Inicio</a> <span>/</span>
+  <a href="/">Início</a> <span>/</span>
   <% if (categoria) { %><a href="/?categoria=<%= categoria.id %>"><%= categoria.nome %></a> <span>/</span><% } %>
   <span><%= produto.nome %></span>
 </nav>

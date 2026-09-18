@@ -8,7 +8,7 @@
       <label>Nome*
         <input type="text" name="nome" required>
       </label>
-      <label>Descricao
+      <label>Descrição
         <textarea name="descricao" rows="3"></textarea>
       </label>
       <button type="submit" class="botao botao-primario">Cadastrar</button>
@@ -18,7 +18,13 @@
     <h2>Categorias cadastradas <span class="contador"><%= categorias.length %></span></h2>
     <div class="tabela-wrap">
       <table class="tabela">
-        <thead><tr><th>Nome</th><th>Descricao</th><th class="numerico">Produtos</th><th>Acoes</th></tr></thead>
+        <thead><tr>
+          <th>Nome</th>
+          <th>Descrição</th>
+          <th class="numerico">Produtos</th>
+          <th>Ações</th>
+        </tr>
+        </thead>
         <tbody>
           <% if (categorias.length === 0) { %>
             <tr><td colspan="4" class="vazio">Nenhuma categoria cadastrada.</td></tr>
