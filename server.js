@@ -1,11 +1,11 @@
 // server.js
 // Ponto de entrada da aplicacao Express, seguindo o padrao MVC:
-//   Model       -> models/*.js         (dados e regras de armazenamento)
-//   View        -> views/pages/*.ejs   (templates HTML, com partials/ para
-//                                        cabecalho/rodape compartilhados)
-//   Controller  -> controllers/*.js    (logica das rotas: GET/POST/PUT/DELETE)
-//   Routes      -> routes/*.js         (mapeamento das rotas Express -> Controller)
-//   Middlewares -> middlewares/*.js    (autenticacao das areas administrativas)
+//
+//   Model       -> models/*.js
+//   View        -> views/pages/*.ejs
+//   Controller  -> controllers/*.js
+//   Routes      -> routes/*.js
+//   Middlewares -> middlewares/*.js
 
 const path = require("path");
 const express = require("express");
@@ -24,78 +24,279 @@ const categoryRoutes = require("./routes/categoryRoutes");
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// --- View engine (EJS) ---
-// Os arquivos .ejs ficam em views/pages/*.ejs; views/partials/*.ejs contem o
-// cabecalho, o menu e o rodape compartilhados por todas as paginas.
+// =====================================================
+// VIEW ENGINE (EJS)
+// =====================================================
+
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 
-// Helpers e dados disponiveis em QUALQUER template, sem precisar repetir em
-// cada chamada de res.render(...).
+
+// =====================================================
+// HELPERS
+// =====================================================
+
 app.locals.formatarPreco = formatarPreco;
 
-// --- Middlewares ---
-app.use(express.urlencoded({ extended: true })); // dados de <form>
-app.use(express.json()); // corpo JSON (util para clientes/API)
 
-// Sessao usada pelo login. Em producao, troque o secret por uma variavel
-// de ambiente e use cookie.secure com HTTPS.
+// =====================================================
+// MIDDLEWARES
+// =====================================================
+
+// Recebe dados enviados por formularios HTML
+app.use(express.urlencoded({ extended: true }));
+
+// Recebe dados enviados em JSON
+app.use(express.json());
+
+
+// =====================================================
+// SESSAO
+// =====================================================
+
 app.use(
   session({
-    secret: process.env.SESSION_SECRET || "gamesmania-segredo-de-desenvolvimento",
+    secret:
+      process.env.SESSION_SECRET ||
+      "gamesmania-segredo-de-desenvolvimento",
+
     resave: false,
+
     saveUninitialized: false,
-    cookie: { httpOnly: true, maxAge: 1000 * 60 * 60 * 8 } // 8 horas
+
+    cookie: {
+      httpOnly: true,
+      maxAge: 1000 * 60 * 60 * 8 // 8 horas
+    }
   })
 );
 
-// Disponibiliza o usuario logado (ou null) para todos os templates via
-// "usuario", sem precisar passar isso manualmente em cada res.render(...).
+
+// =====================================================
+// USUARIO ATUAL
+// =====================================================
+
+// Disponibiliza o usuario logado para os templates
 app.use((req, res, next) => {
   res.locals.usuario = usuarioAtual(req);
   next();
 });
 
-// Permite que formularios HTML (que so suportam GET/POST) simulem PUT e
-// DELETE atraves de ?_method=PUT|DELETE ou de um campo oculto "_method".
+
+// =====================================================
+// LOGGER DE NAVEGAÇÃO E FORMULÁRIOS
+// =====================================================
+
+const camposSensiveis = [
+  "senha",
+  "password",
+  "senhaAtual",
+  "novaSenha",
+  "confirmarSenha",
+  "confirmPassword",
+  "token",
+  "accessToken",
+  "refreshToken",
+  "secret"
+];
+
+function esconderDadosSensiveis(dados) {
+  if (!dados || typeof dados !== "object") {
+    return dados;
+  }
+
+  const dadosSeguros = {};
+
+  for (const chave in dados) {
+    if (
+      camposSensiveis.some(
+        campo => campo.toLowerCase() === chave.toLowerCase()
+      )
+    ) {
+      dadosSeguros[chave] = "[OCULTO]";
+    } else {
+      dadosSeguros[chave] = dados[chave];
+    }
+  }
+
+  return dadosSeguros;
+}
+
+
+app.use((req, res, next) => {
+
+  // Só registra:
+  // GET  -> páginas
+  // POST -> formulários
+  // PUT  -> alterações
+  // DELETE -> exclusões
+  //
+  // Ignora arquivos como:
+  // .js, .css, .png, .jpg, .jpeg, .gif, .svg, .ico, etc.
+
+  const extensaoArquivo = /\.(js|css|png|jpg|jpeg|gif|svg|ico|webp|woff|woff2|ttf|map)$/i;
+
+  if (extensaoArquivo.test(req.path)) {
+    return next();
+  }
+
+  // Também ignora requisições de arquivos da pasta public
+  if (
+    req.path.startsWith("/js/") ||
+    req.path.startsWith("/css/") ||
+    req.path.startsWith("/images/") ||
+    req.path.startsWith("/img/") ||
+    req.path.startsWith("/fonts/")
+  ) {
+    return next();
+  }
+
+  const inicio = Date.now();
+
+  const usuario = usuarioAtual(req);
+
+  let usuarioLogado = "Visitante";
+
+  if (usuario) {
+    usuarioLogado =
+      usuario.nome ||
+      usuario.email ||
+      usuario.usuario ||
+      "Usuário logado";
+  }
+
+  res.on("finish", () => {
+
+    const tempo = Date.now() - inicio;
+
+    console.log("");
+    console.log("==================================================");
+    console.log("             GAMESMANIA - REQUISIÇÃO");
+    console.log("==================================================");
+
+    console.log("Data/Hora:", new Date().toLocaleString());
+    console.log("Método:", req.method);
+    console.log("Rota:", req.originalUrl);
+    console.log("IP:", req.ip);
+    console.log("Usuário:", usuarioLogado);
+    console.log("Status:", res.statusCode);
+    console.log("Tempo:", `${tempo} ms`);
+
+    // Mostrar dados somente em requisições que podem
+    // enviar informações para o servidor
+    if (
+      req.method === "POST" ||
+      req.method === "PUT" ||
+      req.method === "PATCH" ||
+      req.method === "DELETE"
+    ) {
+      const dados = esconderDadosSensiveis(req.body);
+
+      if (dados && Object.keys(dados).length > 0) {
+        console.log("Dados recebidos:", dados);
+      } else {
+        console.log("Dados recebidos: nenhum");
+      }
+    }
+
+    console.log("==================================================");
+    console.log("");
+  });
+
+  next();
+});
+
+
+// =====================================================
+// METHOD OVERRIDE
+// =====================================================
+
+// Permite que formularios HTML simulem PUT e DELETE
 app.use(
   methodOverride((req) => {
-    if (req.query && req.query._method) return req.query._method;
+    if (req.query && req.query._method) {
+      return req.query._method;
+    }
+
     if (req.body && req.body._method) {
       const metodo = req.body._method;
+
       delete req.body._method;
+
       return metodo;
     }
+
     return undefined;
   })
 );
 
+
+// =====================================================
+// ARQUIVOS ESTATICOS
+// =====================================================
+
 app.use(express.static(path.join(__dirname, "public")));
 
-// --- Rotas ---
+
+// =====================================================
+// ROTAS
+// =====================================================
+
 app.use(pageRoutes);
+
 app.use(authRoutes);
+
 app.use(userRoutes);
+
 app.use(productRoutes);
+
 app.use(categoryRoutes);
 
-// --- 404 ---
+
+// =====================================================
+// 404
+// =====================================================
+
 app.use((req, res) => {
   res.status(404).render("pages/404");
 });
 
-// --- Tratamento de erros ---
+
+// =====================================================
+// TRATAMENTO DE ERROS
+// =====================================================
+
 app.use((err, req, res, next) => {
+  console.error("");
+  console.error("====================================");
+  console.error("ERRO NO SERVIDOR");
+  console.error("====================================");
   console.error(err);
+  console.error("====================================");
+  console.error("");
+
   res.status(500).render("pages/message", {
     titulo: "Erro interno",
     mensagem: "Algo deu errado ao processar sua requisicao."
   });
 });
 
+
+// =====================================================
+// INICIAR SERVIDOR
+// =====================================================
+
 app.listen(PORT, () => {
-  console.log(`GAMESMANIA rodando em http://localhost:${PORT}`);
-  console.log(`Login inicial: admin@gamesmania.com / admin123`);
+  console.log("");
+  console.log("====================================");
+  console.log("       GAMESMANIA - SERVIDOR");
+  console.log("====================================");
+  console.log(`Servidor: http://localhost:${PORT}`);
+  console.log("Login inicial: admin@gamesmania.com / admin123");
+  console.log("====================================");
+  console.log("");
 });
 
+
 module.exports = app;
+
