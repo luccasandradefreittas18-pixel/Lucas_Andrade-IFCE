@@ -1,0 +1,69 @@
+<%- include("../partials/top", { title: "Cadastro de produtos", active: "produtos" }) %>
+
+<section class="secao painel-admin">
+  <!-- Lado esquerdo: formulario de cadastro -->
+  <div class="painel-form">
+    <h1>Cadastrar produto</h1>
+    <% if (typeof erro !== "undefined" && erro) { %><p class="form-erro"><%= erro %></p><% } %>
+    <form class="formulario" method="POST" action="/produtos">
+      <label>Nome do produto*
+        <input type="text" name="nome" required value="<%= typeof valores !== "undefined" && valores ? valores.nome : "" %>">
+      </label>
+      <label>Descricao curta*
+        <input type="text" name="descricaoCurta" required value="<%= typeof valores !== "undefined" && valores ? valores.descricaoCurta : "" %>">
+      </label>
+      <label>Descricao completa
+        <textarea name="descricaoCompleta" rows="4"><%= typeof valores !== "undefined" && valores ? valores.descricaoCompleta : "" %></textarea>
+      </label>
+      <div class="campo-duplo">
+        <label>Preco (R$)*
+          <input type="number" name="preco" step="0.01" min="0" required value="<%= typeof valores !== "undefined" && valores ? valores.preco : "" %>">
+        </label>
+        <label>Categoria*
+          <select name="categoriaId" required>
+            <option value="">Selecione...</option>
+            <% categorias.forEach(function (c) { %>
+              <option value="<%= c.id %>"<%= (typeof valores !== "undefined" && valores && Number(valores.categoriaId) === c.id) ? " selected" : "" %>><%= c.nome %></option>
+            <% }) %>
+          </select>
+        </label>
+      </div>
+      <label>Imagem do produto (caminho)
+        <input type="text" name="imagem" placeholder="/imagens/produto.svg" value="<%= typeof valores !== "undefined" && valores ? valores.imagem : "" %>">
+      </label>
+      <button type="submit" class="botao botao-primario">Cadastrar</button>
+    </form>
+  </div>
+
+  <!-- Lado direito: produtos ja cadastrados -->
+  <div class="painel-tabela">
+    <h2>Produtos cadastrados <span class="contador"><%= produtos.length %></span></h2>
+    <div class="tabela-wrap">
+      <table class="tabela">
+        <thead><tr><th>Nome</th><th class="numerico">Preco</th><th>Categoria</th><th>Acoes</th></tr></thead>
+        <tbody>
+          <% if (produtos.length === 0) { %>
+            <tr><td colspan="4" class="vazio">Nenhum produto cadastrado.</td></tr>
+          <% } %>
+          <% produtos.forEach(function (p) { %>
+            <% var categoria = categorias.find(function (c) { return c.id === p.categoriaId; }); %>
+            <tr>
+              <td data-rotulo="Nome"><a href="/tema/<%= p.id %>"><%= p.nome %></a></td>
+              <td data-rotulo="Preco" class="numerico">R$ <%= formatarPreco(p.preco) %></td>
+              <td data-rotulo="Categoria"><%= categoria ? categoria.nome : "—" %></td>
+              <td data-rotulo="Acoes" class="tabela-acoes">
+                <a class="botao botao-pequeno botao-outline" href="/produtos/<%= p.id %>/editar">Editar</a>
+                <form method="POST" action="/produtos/<%= p.id %>?_method=DELETE" data-confirmar="Remover <%= p.nome %>?">
+                  <input type="hidden" name="_method" value="DELETE">
+                  <button class="botao botao-pequeno botao-perigo" type="submit">Excluir</button>
+                </form>
+              </td>
+            </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<%- include("../partials/bottom") %>

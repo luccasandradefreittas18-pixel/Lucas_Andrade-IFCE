@@ -1,0 +1,36 @@
+<%- include("../partials/top", { title: "Editar usuario", active: "usuarios" }) %>
+
+<section class="secao secao-estreita">
+  <h1>Editar usuario</h1>
+  <% if (typeof erro !== "undefined" && erro) { %><p class="form-erro"><%= erro %></p><% } %>
+  <form class="formulario" method="POST" action="/usuarios/<%= usuarioEditado.id %>?_method=PUT">
+    <input type="hidden" name="_method" value="PUT">
+    <label>Nome*
+      <input type="text" name="nome" required value="<%= usuarioEditado.nome %>">
+    </label>
+    <label>Endereco
+      <input type="text" name="endereco" value="<%= usuarioEditado.endereco %>">
+    </label>
+    <label>E-mail*
+      <input type="email" name="email" required value="<%= usuarioEditado.email %>">
+    </label>
+    <label>Telefone
+      <input type="tel" name="telefone" data-mascara="telefone" value="<%= usuarioEditado.telefone %>">
+    </label>
+    <label>Perfil
+      <select name="papel">
+        <option value="cliente"<%= usuarioEditado.papel === "cliente" ? " selected" : "" %>>cliente</option>
+        <option value="admin"<%= usuarioEditado.papel === "admin" ? " selected" : "" %>>admin</option>
+      </select>
+    </label>
+    <label>Nova senha (deixe em branco para manter a atual)
+      <input type="password" name="senha" minlength="6">
+    </label>
+    <div class="formulario-acoes">
+      <button type="submit" class="botao botao-primario">Salvar alteracoes</button>
+      <a class="botao botao-outline" href="/usuarios">Cancelar</a>
+    </div>
+  </form>
+</section>
+
+<%- include("../partials/bottom") %>

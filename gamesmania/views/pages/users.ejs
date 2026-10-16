@@ -1,0 +1,75 @@
+<%
+  var lista = typeof usuarios !== "undefined" ? usuarios : [];
+  var comTabela = typeof mostrarTabela !== "undefined" && mostrarTabela;
+%>
+<%- include("../partials/top", { title: "Cadastro de usuarios", active: comTabela ? "usuarios" : "cadastro" }) %>
+
+<section class="secao <%= comTabela ? "painel-admin" : "secao-estreita" %>">
+  <div class="painel-form">
+    <h1>Preencha com os dados solicitados</h1>
+    <% if (typeof erro !== "undefined" && erro) { %><p class="form-erro"><%= erro %></p><% } %>
+    <form class="formulario" id="form-usuario" method="POST" action="/usuarios">
+      <div class="campo-duplo">
+        <label>Nome*
+          <input type="text" name="nome" required value="<%= typeof valores !== "undefined" && valores ? valores.nome : "" %>">
+        </label>
+        <label>Endereco
+          <input type="text" name="endereco" value="<%= typeof valores !== "undefined" && valores ? valores.endereco : "" %>">
+        </label>
+      </div>
+      <div class="campo-duplo">
+        <label>E-mail*
+          <input type="email" name="email" placeholder="xxx@email.com" required value="<%= typeof valores !== "undefined" && valores ? valores.email : "" %>">
+        </label>
+        <label>Telefone para contato
+          <input type="tel" name="telefone" data-mascara="telefone" placeholder="(00) 00000-0000" value="<%= typeof valores !== "undefined" && valores ? valores.telefone : "" %>">
+        </label>
+      </div>
+      <div class="campo-duplo">
+        <label>Senha*
+          <input type="password" name="senha" id="senha" minlength="6" required>
+        </label>
+        <label>Confirmar senha*
+          <input type="password" name="confirmarSenha" id="confirmarSenha" minlength="6" required>
+        </label>
+      </div>
+      <p class="form-resposta" id="senha-aviso" role="status"></p>
+      <button type="submit" class="botao botao-primario">Cadastrar</button>
+    </form>
+    <% if (!comTabela) { %><p class="apoio">Ja tem uma conta? <a href="/login">Entrar</a></p><% } %>
+  </div>
+
+  <% if (comTabela) { %>
+    <div class="painel-tabela">
+      <h2>Usuarios cadastrados <span class="contador"><%= lista.length %></span></h2>
+      <div class="tabela-wrap">
+        <table class="tabela">
+          <thead><tr><th>Nome</th><th>Endereco</th><th>E-mail</th><th class="numerico">Telefone</th><th>Perfil</th><th>Acoes</th></tr></thead>
+          <tbody>
+            <% if (lista.length === 0) { %>
+              <tr><td colspan="6" class="vazio">Nenhum usuario cadastrado.</td></tr>
+            <% } %>
+            <% lista.forEach(function (u) { %>
+              <tr>
+                <td data-rotulo="Nome"><%= u.nome %></td>
+                <td data-rotulo="Endereco"><%= u.endereco %></td>
+                <td data-rotulo="E-mail"><%= u.email %></td>
+                <td data-rotulo="Telefone" class="numerico"><%= u.telefone %></td>
+                <td data-rotulo="Perfil"><%= u.papel %></td>
+                <td data-rotulo="Acoes" class="tabela-acoes">
+                  <a class="botao botao-pequeno botao-outline" href="/usuarios/<%= u.id %>/editar">Editar</a>
+                  <form method="POST" action="/usuarios/<%= u.id %>?_method=DELETE" data-confirmar="Remover o usuario <%= u.nome %>?">
+                    <input type="hidden" name="_method" value="DELETE">
+                    <button class="botao botao-pequeno botao-perigo" type="submit">Excluir</button>
+                  </form>
+                </td>
+              </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  <% } %>
+</section>
+
+<%- include("../partials/bottom") %>

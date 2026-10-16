@@ -1,0 +1,31 @@
+<%- include("../partials/top", { title: produto.nome, active: "" }) %>
+
+<nav class="trilha" aria-label="Trilha de navegacao">
+  <a href="/">Inicio</a> <span>/</span>
+  <% if (categoria) { %><a href="/?categoria=<%= categoria.id %>"><%= categoria.nome %></a> <span>/</span><% } %>
+  <span><%= produto.nome %></span>
+</nav>
+
+<section class="detalhe-produto">
+  <div class="detalhe-imagem">
+    <img src="<%= produto.imagem %>" alt="<%= produto.nome %>">
+  </div>
+  <div class="detalhe-info">
+    <p class="produto-categoria-tag"><%= categoria ? categoria.nome : "Sem categoria" %></p>
+    <h1><%= produto.nome %></h1>
+    <p class="detalhe-preco">R$ <%= formatarPreco(produto.preco) %></p>
+    <p class="detalhe-descricao"><%= produto.descricaoCompleta %></p>
+    <div class="detalhe-acoes">
+      <button class="botao botao-primario" type="button">Comprar</button>
+      <% if (usuario && usuario.papel === "admin") { %>
+        <a class="botao botao-outline" href="/produtos/<%= produto.id %>/editar">Editar</a>
+        <form method="POST" action="/produtos/<%= produto.id %>?_method=DELETE" data-confirmar="Remover <%= produto.nome %> do catalogo?">
+          <input type="hidden" name="_method" value="DELETE">
+          <button class="botao botao-perigo" type="submit">Excluir</button>
+        </form>
+      <% } %>
+    </div>
+  </div>
+</section>
+
+<%- include("../partials/bottom") %>

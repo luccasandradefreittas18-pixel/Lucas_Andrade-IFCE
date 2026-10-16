@@ -1,0 +1,18 @@
+services:
+  gamesmania:
+    build: .
+    container_name: gamesmania
+    ports:
+      - "3000:3000"
+    environment:
+      - PORT=3000
+      # Troque por um valor proprio em producao (usado para assinar o
+      # cookie de sessao do login).
+      - SESSION_SECRET=troque-este-segredo-em-producao
+    volumes:
+      # Banco SQLite persistente entre reinicios do container.
+      - gamesmania-data:/app/data
+    restart: unless-stopped
+
+volumes:
+  gamesmania-data:

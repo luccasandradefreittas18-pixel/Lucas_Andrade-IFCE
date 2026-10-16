@@ -1,0 +1,9 @@
+<%- include("../partials/top", { title: "Pagina nao encontrada", active: "" }) %>
+
+<section class="secao secao-estreita secao-erro">
+  <h1>404</h1>
+  <p><%= typeof mensagem !== "undefined" ? mensagem : "Pagina nao encontrada." %></p>
+  <a class="botao botao-primario" href="/">Voltar para o inicio</a>
+</section>
+
+<%- include("../partials/bottom") %>

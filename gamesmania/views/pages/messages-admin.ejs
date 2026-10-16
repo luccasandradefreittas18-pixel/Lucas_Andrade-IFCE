@@ -1,0 +1,34 @@
+<%- include("../partials/top", { title: "Mensagens de contato", active: "mensagens" }) %>
+
+<section class="secao">
+  <div class="secao-cabecalho">
+    <h1>Mensagens de contato <span class="contador"><%= mensagens.length %></span></h1>
+  </div>
+
+  <% if (mensagens.length === 0) { %>
+    <p class="vazio">Nenhuma mensagem recebida ainda.</p>
+  <% } %>
+
+  <div class="lista-mensagens">
+    <% mensagens.forEach(function (m) { %>
+      <article class="cartao-mensagem">
+        <div class="cartao-mensagem-cabecalho">
+          <div>
+            <h3><%= m.assunto %></h3>
+            <p class="cartao-mensagem-remetente"><%= m.nome %> — <a href="mailto:<%= m.email %>"><%= m.email %></a></p>
+          </div>
+          <time class="cartao-mensagem-data" datetime="<%= m.recebidoEm %>">
+            <%= new Date(m.recebidoEm).toLocaleString("pt-BR") %>
+          </time>
+        </div>
+        <p class="cartao-mensagem-corpo"><%= m.mensagem %></p>
+        <form method="POST" action="/mensagens/<%= m.id %>?_method=DELETE" data-confirmar="Excluir esta mensagem?">
+          <input type="hidden" name="_method" value="DELETE">
+          <button class="botao botao-pequeno botao-perigo" type="submit">Excluir</button>
+        </form>
+      </article>
+    <% }) %>
+  </div>
+</section>
+
+<%- include("../partials/bottom") %>
